@@ -40,7 +40,8 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id rofi -show run -lines 9 -eh 2 -width 50 -padding 10 -opacity "100" -bw 0 -location 0 -sidebar-mode -levenshtein-sort
 
 # change focus
 bindsym $mod+j focus left
@@ -92,25 +93,34 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# define workspace vars
+set $workspace1 "1: shell"
+set $workspace2 "2: files"
+set $workspace3 "3: web"
+set $workspace4 "4: code"
+set $workspace5 "5: video"
+set $workspace6 "6: temp"
+
+
 # switch to workspace
-bindsym $mod+1 workspace 1: shell
-bindsym $mod+2 workspace 2: edit
-bindsym $mod+3 workspace 3: web
-bindsym $mod+4 workspace 4: video
-bindsym $mod+5 workspace 5: temp
-bindsym $mod+6 workspace 6
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1: shell
-bindsym $mod+Shift+2 move container to workspace 2: edit
-bindsym $mod+Shift+3 move container to workspace 3: web
-bindsym $mod+Shift+4 move container to workspace 4: video
-bindsym $mod+Shift+5 move container to workspace 5: temp
-bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
@@ -170,7 +180,8 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
   status_command i3status
-		tray_output DVI-0
+		tray_output DVI-0 
+        tray_output HDMI-0
         position top
   colors {
     separator #AAAAAA
@@ -207,17 +218,31 @@ bindsym F7 $pactl_decrease
 bindsym F8 $pactl_increase
 bindsym Shift+F12 $pactl_mute
 
+### Take a screenshot with teiler and upload it to fb
+bindsym $mod+Print exec --no-startup-id teiler --quick image area
 
 # Window - workspace definitions
-assign [class="chromium"] 3: web
-assign [class="termite"] 1: shell
+assign [class="Chromium"] $workspace3
+assign [class="Termite"] $workspace1
+assign [class="mplayer"] $workspace5
 
 
 
 # Autostart programs
 exec volumeicon
+exec chromium
+exec termite
+exec pcmanfm
+exec_always compton -f
+exec_xbindkeys
 
 client.focused #664477 #664477 #cccccc #e7d8b1
 client.focused_inactive #e7d8b1 #e7d8b1 #181715 #A074C4
 client.unfocused #222133 #222133 #AAAAAA #A074C4
 client.urgent #CE4045 #CE4045 #e7d8b1 #DCCD69
+
+
+
+# Start programs at start
+# Screenlayout for Dualmonitor
+exec_always xrandr --output DisplayPort-0 --off --output DVI-0 --mode 1920x1200 --pos 1280x0 --rotate normal --output HDMI-0 --mode 1280x1024 --pos 0x0 --rotate normal

@@ -10,8 +10,10 @@ fi
 
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 
-exec dbus-launch --exit-with-session openbox-session
-
+#exec dbus-launch --exit-with-session openbox-session
+exec i3
+sleep 5
 xbindkeys &
 feh --bg-fill --randomize ~/grave/bkpGRAVE/BACKUP/pics/wallpapes/* &
-pgrep redshift &> /dev/null || redshift &> /dev/null &
+redshift &
+setxkbmap -option caps:swapescape &

@@ -5,7 +5,8 @@ export HISTSIZE=50000
 export SAVEHIST=50000
 #eval `dircolors -z` # This generates an error. Please see the discussion above.
 
-autoload -U compinit compinit
+autoload -U compinit 
+compinit
 setopt autopushd pushdminus pushdsilent pushdtohome
 setopt autocd
 setopt cdablevars
@@ -100,6 +101,7 @@ alias tls='tmux list-sessions'
 # Server wecken
 alias wachauf='wol -i 192.168.0.55 D0:50:99:1C:36:42'
 alias gitlog='git log --graph --oneline --decorate --all'
+alias pdfgrep='pdfgrep --cache'
 # type a directory's name to cd to it.
 compctl -/ cd
 export DISPLAY=:0.0

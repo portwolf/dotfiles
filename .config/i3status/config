@@ -8,6 +8,7 @@ order += "ipv6"
 order += "disk /"
 order += "disk /home"
 order += "disk /home/portwolf/v4ult"
+order += "disk /run/media/portwolf/storage"
 order += "run_watch DHCP"
 order += "ethernet wlp3s0"
 order += "cpu_temperature 0"
@@ -55,4 +56,7 @@ disk "/home" {
 
 disk "/home/portwolf/v4ult" {
         format = " v4ult:  %avail/ %total"
+}
+disk "/run/media/portwolf/storage" {
+        format = " storage:  %avail/ %total"
 }

@@ -69,6 +69,7 @@ autocmd BufReadPost *
 autocmd BufRead * normal zz
 set colorcolumn=80			" draw a colored line after 80 chars (python)
 set cursorline              " Highlight cursor line
+set cursorcolumn            " Highlight cursor column
 " System Settings ------------------------------------ }}}
 
 " System Mappings ------------------------------------ {{{
@@ -88,3 +89,4 @@ autocmd BufWritePost,BufEnter *.py Neomake
 let g:deoplete#enable_at_startup=1      "Enable Deoplete at the beginning
 let g:deoplete#enable_ignore_case=1     " input is not case sens. for completition
 let g:deoplete#enable_smart_case=1        " if input has upper case, dont ignore it
+highlight Cursor guifg=green guibg=red
